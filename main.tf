@@ -2,6 +2,15 @@ provider "aws" {
   region     = "us-east-1"
 }
 
+# Backend configuration to use S3 for state storage
+terraform {
+  backend "s3" {
+    bucket = "my_bucket_tfstate"
+    key    = "state/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 # Tạo VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
