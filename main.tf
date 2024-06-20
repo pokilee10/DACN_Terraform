@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-east-1"
+  region     = "us-east-2"
 }
 
 # Tạo VPC
@@ -15,7 +15,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = "us-east-2a"
 
   tags = {
     Name = "Public Subnet"
@@ -160,7 +160,7 @@ resource "aws_ecs_task_definition" "task_1" {
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.my_log_group.name}",
-        "awslogs-region": "us-east-1",
+        "awslogs-region": "us-east-2",
         "awslogs-stream-prefix": "container-1"
       }
     }
@@ -205,7 +205,7 @@ resource "aws_ecs_task_definition" "task_2" {
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.my_log_group.name}",
-        "awslogs-region": "us-east-1",
+        "awslogs-region": "us-east-2",
         "awslogs-stream-prefix": "container-2"
       }
     }
@@ -250,7 +250,7 @@ resource "aws_ecs_task_definition" "task_3" {
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.my_log_group.name}",
-        "awslogs-region": "us-east-1",
+        "awslogs-region": "us-east-2",
         "awslogs-stream-prefix": "container-3"
       }
     }
