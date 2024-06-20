@@ -27,7 +27,7 @@ jobs:
 
       - name: Download terraform.tfstate from S3
         run: |
-           aws s3 cp s3://ec2mytfstate6/state/terraform.tfstate .
+           aws s3 cp s3://ecss3bucket/state/terraform.tfstate .
 
       - name: Terraform destroy
         run: terraform destroy -auto-approve
