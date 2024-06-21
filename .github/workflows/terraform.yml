@@ -9,7 +9,8 @@ jobs:
     env:
       # AWS secrets
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
 
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +25,13 @@ jobs:
 
       - name: Terraform init
         run: terraform init
+
+      - name: Download terraform.tfstate from S3
+        run: |
+           aws s3 cp s3://s3ecsbucket/state/terraform.tfstate .
+
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
 
       - name: Terraform apply
         run: terraform apply -auto-approve
